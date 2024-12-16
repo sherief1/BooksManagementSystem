@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BooksManagementSystem.Common\BooksManagementSystem.Common.csproj" />
-    <ProjectReference Include="..\BooksManagementSystem.Interfaces\BooksManagementSystem.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

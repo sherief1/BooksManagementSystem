@@ -18,6 +18,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BooksManagementSystem.Common\BooksManagementSystem.Common.csproj" />
+    <ProjectReference Include="..\BooksManagementSystem.DataAccess\BooksManagementSystem.DataAccess.csproj" />
+    <ProjectReference Include="..\BooksManagementSystem.DataService\BooksManagementSystem.DataService.csproj" />
+    <ProjectReference Include="..\BooksManagementSystem.Interfaces\BooksManagementSystem.Interfaces.csproj" />
+    <ProjectReference Include="..\BooksManagementSystem.Repo\BooksManagementSystem.Repo.csproj" />
   </ItemGroup>
 
 </Project>
