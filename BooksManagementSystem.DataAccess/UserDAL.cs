@@ -1,5 +1,6 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
+using System.Security.Cryptography;
 
 namespace BooksManagementSystem.DataAccess
 {
@@ -8,11 +9,8 @@ namespace BooksManagementSystem.DataAccess
         public void Delete(User user, AppDbContext appDbContext)
         {
             appDbContext.user.Remove(user);
-        }
+            appDbContext.SaveChanges();
 
-        public IEnumerable<User> GetAll(AppDbContext appDbContext)
-        {
-            return appDbContext.user.ToList();
         }
 
         public User GetByID(int id, AppDbContext appDbContext)
@@ -27,11 +25,11 @@ namespace BooksManagementSystem.DataAccess
 
         }
 
-        public void Update(User user, AppDbContext appDbContext)
+        public User GetByUsername(string username,AppDbContext appDbContext)
         {
-            appDbContext.user.Update(user);
-            appDbContext.SaveChanges();
-
+            return appDbContext.user.Where(user => user.UserName == username).SingleOrDefault();
         }
+
+        
     }
 }

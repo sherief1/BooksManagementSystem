@@ -1,4 +1,5 @@
 ﻿using BooksManagementSystem.Common;
+using BooksManagementSystem.Common.Helpers;
 using BooksManagementSystem.Interfaces;
 
 namespace BooksManagementSystem.DataService
@@ -11,6 +12,14 @@ namespace BooksManagementSystem.DataService
             _userRepo = userRepo;
         }
 
+        public User GetByUsername(string username)
+        {
+            return _userRepo.GetByUsername(username);
+        }
+        private User GetByID(int id)
+        {
+            return _userRepo.GetByID(id);
+        }
         public bool Delete(int id)
         {
             User UsertoDelete = GetByID(id);
@@ -20,24 +29,30 @@ namespace BooksManagementSystem.DataService
             return true;
         }
 
-        public IEnumerable<User> GetAll()
+        public string Login(string username, string password)
         {
-            return _userRepo.GetAll();
+            var existingUser = _userRepo.GetByUsername(username);
+            if (existingUser != null)
+            {
+                bool isVerified = Hashing.VerifyHash(password, existingUser.Password);
+                if (isVerified)
+                {
+                    return TokenManager.GenerateToken(username);
+                }
+            }
+            return "UserName and password aren't correct";
         }
 
-        public User GetByID(int id)
+        public bool Insert(User user)
         {
-            return _userRepo.GetByID(id);
-        }
-
-        public void Insert(User user)
-        {
-            _userRepo.Insert(user);
-        }
-
-        public void Update(User user)
-        {
-            _userRepo.Update(user);
+            if(_userRepo.GetByUsername(user.UserName) == null)
+            {
+                user.Password = Hashing.GenerateHash(user.Password);
+                _userRepo.Insert(user);
+                return true;
+            }
+            else 
+                return false;
         }
     }
 }

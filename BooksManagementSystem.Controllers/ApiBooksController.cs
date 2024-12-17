@@ -1,5 +1,6 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BooksManagementSystem.Controllers
@@ -10,6 +11,7 @@ namespace BooksManagementSystem.Controllers
     // This attribute marks the class as an API controller
     // providing useful behavior like automatic validation of input models and binding HTTP request data.
     [ApiController]
+    [Authorize]
     public class ApiBooksController : ControllerBase
     {
 

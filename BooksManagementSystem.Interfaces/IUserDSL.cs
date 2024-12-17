@@ -4,10 +4,9 @@ namespace BooksManagementSystem.Interfaces
 {
     public interface IUserDSL
     {
-        IEnumerable<User> GetAll();
-        User GetByID(int id);
-        void Insert(User user);
-        void Update(User user);
+        User GetByUsername(string username);
+        bool Insert(User user);
+        string Login(string username, string password);
         bool Delete(int id);
     }
 }

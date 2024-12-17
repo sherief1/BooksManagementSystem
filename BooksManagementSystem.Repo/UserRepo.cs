@@ -16,25 +16,19 @@ namespace BooksManagementSystem.Repo
         {
             _userDAL.Delete(user, _appDbContext);
         }
-
-        public IEnumerable<User> GetAll()
-        {
-            return _userDAL.GetAll(_appDbContext);
-        }
-
         public User GetByID(int id)
         {
             return _userDAL.GetByID(id, _appDbContext);
         }
 
+        public User GetByUsername(string username)
+        {
+            return _userDAL.GetByUsername(username, _appDbContext);
+        }
+
         public void Insert(User user)
         {
             _userDAL.Insert(user, _appDbContext);
-        }
-
-        public void Update(User user)
-        {
-            _userDAL.Update(user, _appDbContext);
         }
     }
 }

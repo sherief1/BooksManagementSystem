@@ -23,7 +23,7 @@ namespace BooksManagementSystem.Common
         [MaxLength(14)]
         public string PhoneNumber { get; set; }
         [Required]
-        [MaxLength(30)]
+        [MaxLength(100)]
         public string Password { get; set; }
         [Required]
         [MaxLength(50)]

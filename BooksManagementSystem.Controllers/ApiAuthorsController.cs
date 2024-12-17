@@ -1,11 +1,14 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BooksManagementSystem.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
+
     public class ApiAuthorsController : ControllerBase
     {
         private readonly IAuthorDSL _AuthorDSL;
