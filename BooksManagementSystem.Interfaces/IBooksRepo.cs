@@ -1,18 +1,10 @@
-﻿using BooksManagementSystem.Data;
-using BooksManagementSystem.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BooksManagementSystem.Common;
 
 namespace BooksManagementSystem.Interfaces
 {
     public interface IBooksRepo
     {
         IEnumerable<Book> GetAll();
-        //Task<Book> GetByID(int id);
-
         void Insert(Book book);
         void Update(Book book);
         void Delete(Book book);

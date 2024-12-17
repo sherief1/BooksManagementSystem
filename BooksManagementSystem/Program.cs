@@ -1,4 +1,4 @@
-using BooksManagementSystem.Data;
+using BooksManagementSystem.Common;
 using BooksManagementSystem.DataAccess;
 using BooksManagementSystem.DataService;
 using BooksManagementSystem.Interfaces;
@@ -9,10 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// Add services to the container.
 builder.Services.AddScoped<IBooksDSL, BooksDSL>();
 builder.Services.AddScoped<IBooksRepo, BooksRepo>();
 builder.Services.AddScoped<IBooksDAL, BooksDAL>();
+
+builder.Services.AddScoped<IAuthorDSL, AuthorDSL>();
+builder.Services.AddScoped<IAuthorRepo, AuthorRepo>();
+builder.Services.AddScoped<IAuthorDAL, AuthorDAL>();
+
+builder.Services.AddScoped<IUserDSL, UserDSL>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<IUserDAL, UserDAL>();
 
 // Register DbContext with SQL Server
 builder.Services.AddDbContext<AppDbContext>(op =>

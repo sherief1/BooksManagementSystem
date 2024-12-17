@@ -1,10 +1,4 @@
-﻿using BooksManagementSystem.Data;
-using BooksManagementSystem.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BooksManagementSystem.Common;
 
 namespace BooksManagementSystem.Interfaces
 {

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BooksManagementSystem.Common.Enums
+﻿namespace BooksManagementSystem.Common
 {
     internal enum CategoryEnum
     {
-       Action,
-       Drama,
+        Action,
+        Drama,
     }
 }

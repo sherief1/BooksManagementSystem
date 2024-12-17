@@ -1,11 +1,5 @@
-﻿using BooksManagementSystem.Data;
+﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
-using BooksManagementSystem.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BooksManagementSystem.DataAccess
 {
@@ -24,7 +18,7 @@ namespace BooksManagementSystem.DataAccess
 
         public List<Book> GetAll(AppDbContext appDbContext)
         {
-           return appDbContext.books.ToList();
+            return appDbContext.books.ToList();
         }
 
         public void Insert(Book book, AppDbContext appDbContext)

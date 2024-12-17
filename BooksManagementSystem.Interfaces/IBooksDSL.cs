@@ -1,4 +1,4 @@
-﻿using BooksManagementSystem.Model;
+﻿using BooksManagementSystem.Common;
 
 namespace BooksManagementSystem.Interfaces
 {
@@ -7,7 +7,7 @@ namespace BooksManagementSystem.Interfaces
         IEnumerable<Book> GetAll();
         Book GetByID(int id);
         void Insert(Book book);
-        void Update(Book book);             
+        void Update(Book book);
         bool Delete(int id);
         List<Book> Search(string name);
     }

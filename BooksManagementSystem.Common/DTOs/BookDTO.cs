@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BooksManagementSystem.Model
+﻿namespace BooksManagementSystem.Common
 {
     public class BookDTO
     {

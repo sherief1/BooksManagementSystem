@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BooksManagementSystem.Model
+﻿namespace BooksManagementSystem.Common
 {
     public class AuthorDTO
     {

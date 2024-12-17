@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
-namespace BooksManagementSystem.Model
+namespace BooksManagementSystem.Common
 {
     public class Author
     {
@@ -11,6 +12,7 @@ namespace BooksManagementSystem.Model
         public string Name { get; set; }
 
         // Navigation property for related books
-        public ICollection<Book> Books { get; set; }
+        [JsonIgnore]
+        public ICollection<Book> Books = new List<Book>();
     }
 }

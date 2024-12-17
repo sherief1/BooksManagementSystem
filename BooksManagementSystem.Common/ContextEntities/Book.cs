@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-namespace BooksManagementSystem.Model
+namespace BooksManagementSystem.Common
 {
     public class Book
     {
@@ -15,9 +16,9 @@ namespace BooksManagementSystem.Model
 
         // Foreign key
         public int AuthorId { get; set; }
-
         [ForeignKey(nameof(AuthorId))]
-        public Author Author { get; set; }
+        [JsonIgnore]
+        public Author Author = new Author();
 
     }
 }

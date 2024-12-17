@@ -1,19 +1,14 @@
-﻿using BooksManagementSystem.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BooksManagementSystem.Common;
 
 namespace BooksManagementSystem.Interfaces
 {
     public interface IAuthorDAL
     {
-
-        IEnumerable<Author> GetAuthors();
-        void Insert(Author author);
-        void Update(Author author);
-        void Delete(Author author);
-        IEnumerable<Author> Search(string name);
+        IEnumerable<Author> GetAll(AppDbContext appDbContext);
+        Author GetByID(int id, AppDbContext appDbContext);
+        void Insert(Author author, AppDbContext appDbContext);
+        void Update(Author author, AppDbContext appDbContext);
+        void Delete(Author author, AppDbContext appDbContext);
+        List<Author> Search(string name, AppDbContext appDbContext);
     }
 }

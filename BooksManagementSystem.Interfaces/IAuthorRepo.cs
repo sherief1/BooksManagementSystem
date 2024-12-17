@@ -1,18 +1,14 @@
-﻿using BooksManagementSystem.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BooksManagementSystem.Common;
 
 namespace BooksManagementSystem.Interfaces
 {
-     public interface IAuthorRepo
+    public interface IAuthorRepo
     {
-        IEnumerable<Author> GetAuthors();
+        IEnumerable<Author> GetAll();
+        Author GetByID(int id);
         void Insert(Author author);
         void Update(Author author);
         void Delete(Author author);
-        IEnumerable<Author> Search(string name);
+        List<Author> Search(string name);
     }
 }

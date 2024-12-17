@@ -1,11 +1,5 @@
-﻿using BooksManagementSystem.Data;
+﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
-using BooksManagementSystem.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BooksManagementSystem.DataService
 {
@@ -19,7 +13,7 @@ namespace BooksManagementSystem.DataService
         public bool Delete(int id)
         {
             Book bookToDelete = GetByID(id);
-            if(bookToDelete == null)
+            if (bookToDelete == null)
                 return false;
             _booksRepo.Delete(bookToDelete);
             return true;

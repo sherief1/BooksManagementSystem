@@ -1,12 +1,5 @@
-﻿using BooksManagementSystem.Data;
+﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
-using BooksManagementSystem.Model;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BooksManagementSystem.Repo
 {
@@ -22,7 +15,7 @@ namespace BooksManagementSystem.Repo
         }
         public void Delete(Book book)
         {
-           _booksDAL.Delete(book, _appDbContext);
+            _booksDAL.Delete(book, _appDbContext);
         }
         public Book GetByID(int id)
         {
@@ -36,12 +29,12 @@ namespace BooksManagementSystem.Repo
 
         public void Insert(Book book)
         {
-           _booksDAL.Insert(book, _appDbContext);
+            _booksDAL.Insert(book, _appDbContext);
         }
 
         public void Update(Book book)
         {
-           _booksDAL.Update(book, _appDbContext);
+            _booksDAL.Update(book, _appDbContext);
         }
         public List<Book> Search(string name)
         {
