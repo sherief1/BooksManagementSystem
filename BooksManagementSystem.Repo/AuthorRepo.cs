@@ -16,6 +16,7 @@ namespace BooksManagementSystem.Repo
 
         public void Delete(Author author)
         {
+
             _authorDAL.Delete(author, _appDbContext);
         }
         public Author GetByID(int id)
@@ -28,62 +29,28 @@ namespace BooksManagementSystem.Repo
             return _authorDAL.GetAll(_appDbContext);
         }
 
-        public void Insert(Author author)
+        public void Insert(AuthorDTO authorDTO)
         {
+            var author = new Author
+            {
+                Name = authorDTO.Name,
+            };
             _authorDAL.Insert(author, _appDbContext);
         }
 
-        public void Update(Author author)
+        public void Update(AuthorDTO authorDTO)
         {
+            var author = new Author
+            {
+                Id = authorDTO.Id,
+                Name = authorDTO.Name,
+            };
             _authorDAL.Update(author, _appDbContext);
         }
         public List<Author> Search(string name)
         {
             return _authorDAL.Search(name, _appDbContext);
         }
-        //public void Delete(Author author)
-        //{
-        //    if (author != null)
-        //    {
-        //        _appDbContext.author.Remove(author);
-        //        _appDbContext.SaveChanges();
-        //    }
-        //}
-
-        //public IEnumerable<Author> GetAuthors()
-        //{
-        //    return _appDbContext.author.ToList();
-
-        //}
-
-        //public void Insert(Author author)
-        //{
-        //    if (author != null)
-        //    {
-        //        _appDbContext.author.Add(author);
-        //        _appDbContext.SaveChanges();
-        //    }
-
-        //}
-
-        //public IEnumerable<Author> Search(string name)
-        //{
-        //    var query = _appDbContext.author.AsQueryable();
-
-        //    if (!string.IsNullOrEmpty(name))//IF name != null
-        //    {
-        //        query = query.Where(a => a.Name.Contains(name));
-        //    }
-        //    return query.ToList();
-        //}
-
-        //public void Update(Author author)
-        //{
-        //    if (author != null)
-        //    {
-        //        _appDbContext.author.Update(author);
-        //        _appDbContext.SaveChanges();
-        //    }
-        //}
+        
     }
 }

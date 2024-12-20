@@ -3,11 +3,11 @@ using BooksManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BooksManagementSystem.Controllers
+namespace BooksManagementSystem
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ApiUserController : ControllerBase
     {
 

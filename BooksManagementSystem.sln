@@ -5,17 +5,15 @@ VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagementSystem", "BooksManagementSystem\BooksManagementSystem.csproj", "{691875F5-27E8-41F0-94A5-B868920F986E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManagementSystem.Common", "BooksManagementSystem.Common\BooksManagementSystem.Common.csproj", "{7D684F2F-8F2C-4634-8C80-75A7295FA3C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagementSystem.Common", "BooksManagementSystem.Common\BooksManagementSystem.Common.csproj", "{7D684F2F-8F2C-4634-8C80-75A7295FA3C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManagementSystem.Controllers", "BooksManagementSystem.Controllers\BooksManagementSystem.Controllers.csproj", "{2F933ABC-685C-4691-9505-AF7C8A8159FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagementSystem.DataService", "BooksManagementSystem.DataService\BooksManagementSystem.DataService.csproj", "{BC977C47-F694-4DF5-9868-DC07D6F3DC57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManagementSystem.DataService", "BooksManagementSystem.DataService\BooksManagementSystem.DataService.csproj", "{BC977C47-F694-4DF5-9868-DC07D6F3DC57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagementSystem.Repo", "BooksManagementSystem.Repo\BooksManagementSystem.Repo.csproj", "{F67C81A1-C781-44D4-85BA-1B759C1A7FEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManagementSystem.Repo", "BooksManagementSystem.Repo\BooksManagementSystem.Repo.csproj", "{F67C81A1-C781-44D4-85BA-1B759C1A7FEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagementSystem.DataAccess", "BooksManagementSystem.DataAccess\BooksManagementSystem.DataAccess.csproj", "{94D6BD03-C7E7-41D2-84EF-B0E1ED8E1665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManagementSystem.DataAccess", "BooksManagementSystem.DataAccess\BooksManagementSystem.DataAccess.csproj", "{94D6BD03-C7E7-41D2-84EF-B0E1ED8E1665}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksManagementSystem.Interfaces", "BooksManagementSystem.Interfaces\BooksManagementSystem.Interfaces.csproj", "{0E37AD1E-3BC8-4018-8C40-3A0F4BF0D228}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BooksManagementSystem.Interfaces", "BooksManagementSystem.Interfaces\BooksManagementSystem.Interfaces.csproj", "{0E37AD1E-3BC8-4018-8C40-3A0F4BF0D228}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{7D684F2F-8F2C-4634-8C80-75A7295FA3C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D684F2F-8F2C-4634-8C80-75A7295FA3C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D684F2F-8F2C-4634-8C80-75A7295FA3C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F933ABC-685C-4691-9505-AF7C8A8159FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F933ABC-685C-4691-9505-AF7C8A8159FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F933ABC-685C-4691-9505-AF7C8A8159FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F933ABC-685C-4691-9505-AF7C8A8159FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC977C47-F694-4DF5-9868-DC07D6F3DC57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC977C47-F694-4DF5-9868-DC07D6F3DC57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC977C47-F694-4DF5-9868-DC07D6F3DC57}.Release|Any CPU.ActiveCfg = Release|Any CPU

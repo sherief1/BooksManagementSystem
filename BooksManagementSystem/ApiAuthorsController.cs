@@ -3,11 +3,11 @@ using BooksManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BooksManagementSystem.Controllers
+namespace BooksManagementSystem
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
 
     public class ApiAuthorsController : ControllerBase
     {
@@ -31,7 +31,7 @@ namespace BooksManagementSystem.Controllers
 
         }
         [HttpPost]
-        public Task<IActionResult> AddAuthor(Author author)
+        public Task<IActionResult> AddAuthor([FromForm]AuthorDTO author)
         {
             _AuthorDSL.Insert(author);
             return Task.FromResult<IActionResult>(Ok());
@@ -46,10 +46,11 @@ namespace BooksManagementSystem.Controllers
         }
         //This method handles the EDIT requests
         [HttpPut]
-        public async Task<IActionResult> UpdateAuthor(Author author)
+        public async Task<IActionResult> UpdateAuthor([FromForm]AuthorDTO authorDTO)
         {
-            _AuthorDSL.Update(author);
-            return Ok();
+            _AuthorDSL.Update(authorDTO);
+            return Ok("updated !!!");
+
         }
         [HttpGet]
         public async Task<IActionResult> SearchAuthor(string Name)

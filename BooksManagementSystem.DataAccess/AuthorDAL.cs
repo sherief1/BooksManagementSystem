@@ -1,5 +1,7 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BooksManagementSystem.DataAccess
 {
@@ -14,11 +16,12 @@ namespace BooksManagementSystem.DataAccess
         }
         public Author GetByID(int id, AppDbContext appDbContext)
         {
+           
             return appDbContext.author.Find(id);
         }
 
         public IEnumerable<Author> GetAll(AppDbContext appDbContext)
-        {
+        {            
             return appDbContext.author.ToList();
         }
 

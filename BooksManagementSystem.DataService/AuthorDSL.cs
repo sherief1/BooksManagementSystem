@@ -28,14 +28,14 @@ namespace BooksManagementSystem.DataService
             return _authorRepo.GetAll();
         }
 
-        public void Insert(Author author)
+        public void Insert(AuthorDTO authorDTO)
         {
-            _authorRepo.Insert(author);
+            _authorRepo.Insert(authorDTO);
         }
 
-        public void Update(Author author)
+        public void Update(AuthorDTO authorDTO)
         {
-            _authorRepo.Update(author);
+            _authorRepo.Update(authorDTO);
         }
         public List<Author> Search(string name)
         {

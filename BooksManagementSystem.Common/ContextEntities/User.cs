@@ -13,21 +13,22 @@ namespace BooksManagementSystem.Common
         [MaxLength(50)]
         public string LastName { get; set; }
         [Required]
-        public DateTime
-            BirthDate
-        { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public string Email { get; set; }
 
         [Required]
         [MaxLength(14)]
         public string PhoneNumber { get; set; }
-        [Required]
-        [MaxLength(100)]
-        public string Password { get; set; }
+       
         [Required]
         [MaxLength(50)]
         public string UserName { get; set; }
+       
+        [Required]
+        [MaxLength(100)]
+        public string Password { get; set; }
+        
 
     }
 }

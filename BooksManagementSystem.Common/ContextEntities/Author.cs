@@ -10,9 +10,8 @@ namespace BooksManagementSystem.Common
         [Required]                  //cannot be null
         [MaxLength(50)]
         public string Name { get; set; }
-
         // Navigation property for related books
-        [JsonIgnore]
+        //[JsonIgnore]
         public ICollection<Book> Books = new List<Book>();
     }
 }

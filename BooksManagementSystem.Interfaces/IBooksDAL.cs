@@ -6,7 +6,7 @@ namespace BooksManagementSystem.Interfaces
     {
         List<Book> GetAll(AppDbContext appDbContext);
         //Task<Book> GetByID(int id, AppDbContext appDbContext);
-        void Insert(Book book, AppDbContext appDbContext);
+        Task Insert(Book book, AppDbContext appDbContext);
         void Update(Book book, AppDbContext appDbContext);
         void Delete(Book book, AppDbContext appDbContext);
         List<Book> Search(string name, AppDbContext appDbContext);

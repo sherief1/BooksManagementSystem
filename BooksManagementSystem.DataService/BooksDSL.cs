@@ -1,6 +1,7 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
 
+
 namespace BooksManagementSystem.DataService
 {
     public class BooksDSL : IBooksDSL
@@ -12,13 +13,13 @@ namespace BooksManagementSystem.DataService
         }
         public bool Delete(int id)
         {
-            Book bookToDelete = GetByID(id);
+            BookDTO bookToDelete = GetByID(id);
             if (bookToDelete == null)
                 return false;
             _booksRepo.Delete(bookToDelete);
             return true;
         }
-        public Book GetByID(int id)
+        public BookDTO GetByID(int id)
         {
             return _booksRepo.GetByID(id);
         }
@@ -28,9 +29,9 @@ namespace BooksManagementSystem.DataService
             return _booksRepo.GetAll();
         }
 
-        public void Insert(Book book)
+        public async Task Insert(BookDTO bookDTO)
         {
-            _booksRepo.Insert(book);
+            await _booksRepo.Insert(bookDTO);
         }
 
         public void Update(Book book)

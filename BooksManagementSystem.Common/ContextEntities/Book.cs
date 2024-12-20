@@ -12,12 +12,16 @@ namespace BooksManagementSystem.Common
         [MaxLength(100)]
         public string Title { get; set; }
         [Required]
+        public double Price { get; set; }
+        [Required]
         public DateTime PublishDate { get; set; }
 
+        public byte[]? Image { get; set; }
         // Foreign key
+        //[JsonIgnore]
+        [ForeignKey(nameof(Author))]
         public int AuthorId { get; set; }
-        [ForeignKey(nameof(AuthorId))]
-        [JsonIgnore]
+        //[JsonIgnore]
         public Author Author = new Author();
 
     }

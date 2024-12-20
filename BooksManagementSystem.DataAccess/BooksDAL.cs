@@ -7,7 +7,6 @@ namespace BooksManagementSystem.DataAccess
     {
         public void Delete(Book book, AppDbContext appDbContext)
         {
-
             appDbContext.books.Remove(book);
             appDbContext.SaveChanges();
         }
@@ -21,10 +20,10 @@ namespace BooksManagementSystem.DataAccess
             return appDbContext.books.ToList();
         }
 
-        public void Insert(Book book, AppDbContext appDbContext)
+        public async Task Insert(Book book, AppDbContext appDbContext)
         {
-            appDbContext.books.Add(book);
-            appDbContext.SaveChanges();
+           appDbContext.books.Add(book);
+           await appDbContext.SaveChangesAsync();
         }
 
         public List<Book> Search(string name, AppDbContext appDbContext)
