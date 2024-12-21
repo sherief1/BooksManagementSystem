@@ -54,9 +54,9 @@ namespace BooksManagementSystem
 
         //This method handles the EDIT requests
         [HttpPut]
-        public async Task<IActionResult> UpdateBook(Book book)
+        public async Task<IActionResult> UpdateBook(BookDTO bookDTO)
         {
-            _booksDSL.Update(book);
+            _booksDSL.Update(bookDTO);
             return Ok();
         }
         [HttpGet]                                          

@@ -34,9 +34,9 @@ namespace BooksManagementSystem.DataService
             await _booksRepo.Insert(bookDTO);
         }
 
-        public void Update(Book book)
+        public void Update(BookDTO bookDTO)
         {
-            _booksRepo.Update(book);
+            _booksRepo.Update(bookDTO);
         }
         public IEnumerable<BookDTO> Search(string name)
         {

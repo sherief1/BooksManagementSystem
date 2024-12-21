@@ -6,7 +6,7 @@ namespace BooksManagementSystem.Interfaces
     {
         IEnumerable<BookDTO> GetAll();
         Task Insert(BookDTO bookDTO);
-        void Update(Book book);
+        void Update(BookDTO bookDTO);
         void Delete(BookDTO bookDTO);
         BookDTO GetByID(int id);
         IEnumerable<BookDTO> Search(string name);

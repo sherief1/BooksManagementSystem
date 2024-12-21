@@ -81,9 +81,9 @@ namespace BooksManagementSystem.Repo
             await _booksDAL.Insert(MapFields(bookDTO), _appDbContext);
         }
 
-        public void Update(Book book)
+        public void Update(BookDTO bookDTO)
         {
-            _booksDAL.Update(book, _appDbContext);
+            _booksDAL.Update(MapFields(bookDTO), _appDbContext);
         }
         public IEnumerable<BookDTO> Search(string name)
         {
