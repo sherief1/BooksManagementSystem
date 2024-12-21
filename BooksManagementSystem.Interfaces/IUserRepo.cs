@@ -1,13 +1,14 @@
 ﻿using BooksManagementSystem.Common;
+using BooksManagementSystem.Common.DTOs;
 
 namespace BooksManagementSystem.Interfaces
 {
     public interface IUserRepo
     {
-        User GetByID(int id);
-        void Insert(User user);
-        void Delete(User user);
-        User GetByUsername(string username);
+        UserDTO GetByID(int id);
+        void Insert(UserDTO userDTO);
+        void Delete(UserDTO userDTO);
+        UserDTO GetByUsername(string username);
     }
 
 }

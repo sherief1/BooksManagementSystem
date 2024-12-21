@@ -1,4 +1,4 @@
-﻿using BooksManagementSystem.Common;
+﻿using BooksManagementSystem.Common.DTOs;
 using BooksManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,6 @@ namespace BooksManagementSystem
         {
             _userDSL = userDSL;
         }
-
         [HttpPost]
         [AllowAnonymous]
         public IActionResult Login(string username, string password)
@@ -25,7 +24,7 @@ namespace BooksManagementSystem
         }
 
         [HttpPost]
-        public IActionResult InsertUser(User user)
+        public IActionResult InsertUser([FromForm]UserDTO user)
         {
            if(_userDSL.Insert(user)==true)
             return Ok();

@@ -15,7 +15,7 @@ namespace BooksManagementSystem.DataAccess
             return appDbContext.books.Find(id);
         }
 
-        public List<Book> GetAll(AppDbContext appDbContext)
+        public IEnumerable<Book> GetAll(AppDbContext appDbContext)
         {
             return appDbContext.books.ToList();
         }
@@ -26,7 +26,7 @@ namespace BooksManagementSystem.DataAccess
            await appDbContext.SaveChangesAsync();
         }
 
-        public List<Book> Search(string name, AppDbContext appDbContext)
+        public IEnumerable<Book> Search(string name, AppDbContext appDbContext)
         {
             return appDbContext.books.Where(book => book.Title.ToLower().Contains(name.ToLower())).ToList();
         }

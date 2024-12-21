@@ -4,11 +4,11 @@ namespace BooksManagementSystem.Interfaces
 {
     public interface IAuthorDSL
     {
-        IEnumerable<Author> GetAll();
-        Author GetByID(int id);
+        IEnumerable<AuthorDTO> GetAll();
+        AuthorDTO GetByID(int id);
         void Insert(AuthorDTO authorDTO);
         void Update(AuthorDTO authorDTO);
         bool Delete(int id);
-        List<Author> Search(string name);
+        IEnumerable<AuthorDTO> Search(string name);
     }
 }

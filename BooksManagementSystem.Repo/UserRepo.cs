@@ -1,5 +1,6 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
+using BooksManagementSystem.Common.DTOs;
 
 namespace BooksManagementSystem.Repo
 {
@@ -12,23 +13,61 @@ namespace BooksManagementSystem.Repo
             _appDbContext = appDbContext;
             _userDAL = userDAL;
         }
-        public void Delete(User user)
+        User MapFields(UserDTO userDTO)
         {
-            _userDAL.Delete(user, _appDbContext);
+            var user = new User
+            {
+               FirstName = userDTO.FirstName,
+               LastName = userDTO.LastName,
+               PhoneNumber = userDTO.PhoneNumber,
+               BirthDate = userDTO.BirthDate,
+               Email = userDTO.Email,
+               UserName = userDTO.UserName,
+               Password = userDTO.Password,
+            };
+            return user;
         }
-        public User GetByID(int id)
+        UserDTO MapFields(User user)
         {
-            return _userDAL.GetByID(id, _appDbContext);
+            UserDTO userDTO = new UserDTO
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                BirthDate = user.BirthDate,
+                Email = user.Email,
+                UserName = user.UserName,
+                Password = user.Password,
+            };
+            return userDTO;
+        }
+        public void Delete(UserDTO userDTO)
+        {
+            _userDAL.Delete(MapFields(userDTO), _appDbContext);
+        }
+        public UserDTO GetByID(int id)
+        {
+           var user = _userDAL.GetByID(id, _appDbContext);
+           if (user == null)
+           {
+               return null;
+           }
+            return MapFields(user);
         }
 
-        public User GetByUsername(string username)
+        public UserDTO GetByUsername(string username)
         {
-            return _userDAL.GetByUsername(username, _appDbContext);
+            var user = _userDAL.GetByUsername(username, _appDbContext);
+            if (user == null)
+            {
+                return null;
+            }
+            return MapFields(user);
         }
 
-        public void Insert(User user)
+        public void Insert(UserDTO userDTO)
         {
-            _userDAL.Insert(user, _appDbContext);
+            _userDAL.Insert(MapFields(userDTO), _appDbContext);
         }
     }
 }

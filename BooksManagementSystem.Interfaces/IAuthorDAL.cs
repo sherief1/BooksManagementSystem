@@ -9,6 +9,6 @@ namespace BooksManagementSystem.Interfaces
         void Insert(Author author, AppDbContext appDbContext);
         void Update(Author author, AppDbContext appDbContext);
         void Delete(Author author, AppDbContext appDbContext);
-        List<Author> Search(string name, AppDbContext appDbContext);
+        IEnumerable<Author> Search(string name, AppDbContext appDbContext);
     }
 }

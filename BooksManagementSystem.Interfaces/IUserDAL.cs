@@ -1,4 +1,6 @@
 ﻿using BooksManagementSystem.Common;
+using BooksManagementSystem.Common.DTOs;
+
 
 namespace BooksManagementSystem.Interfaces
 {

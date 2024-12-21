@@ -63,9 +63,8 @@ namespace BooksManagementSystem
         public async Task<IActionResult> SearchTitle(string title)
         {
 
-            if (_booksDSL.Search(title).Count > 0)
+            if (_booksDSL.Search(title) != null)
             {
-
                 return Ok(_booksDSL.Search(title));
             }
             return BadRequest("No match found");

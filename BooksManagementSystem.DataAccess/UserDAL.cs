@@ -1,6 +1,7 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
 using System.Security.Cryptography;
+using BooksManagementSystem.Common.DTOs;
 
 namespace BooksManagementSystem.DataAccess
 {
@@ -12,7 +13,7 @@ namespace BooksManagementSystem.DataAccess
             appDbContext.SaveChanges();
 
         }
-
+                   
         public User GetByID(int id, AppDbContext appDbContext)
         {
             return appDbContext.user.Find(id);

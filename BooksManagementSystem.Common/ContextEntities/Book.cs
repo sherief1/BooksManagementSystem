@@ -15,7 +15,6 @@ namespace BooksManagementSystem.Common
         public double Price { get; set; }
         [Required]
         public DateTime PublishDate { get; set; }
-
         public byte[]? Image { get; set; }
         // Foreign key
         //[JsonIgnore]

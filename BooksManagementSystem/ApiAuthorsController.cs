@@ -55,9 +55,8 @@ namespace BooksManagementSystem
         [HttpGet]
         public async Task<IActionResult> SearchAuthor(string Name)
         {
-            if (_AuthorDSL.Search(Name).Count > 0)
+            if (_AuthorDSL.Search(Name) != null)
             {
-
                 return Ok(_AuthorDSL.Search(Name));
             }
             return BadRequest("No match found");

@@ -24,13 +24,13 @@ namespace BooksManagementSystem.DataService
             return _booksRepo.GetByID(id);
         }
 
-        public IEnumerable<Book> GetAll()
+        public IEnumerable<BookDTO> GetAll()
         {
             return _booksRepo.GetAll();
         }
 
         public async Task Insert(BookDTO bookDTO)
-        {
+        {   
             await _booksRepo.Insert(bookDTO);
         }
 
@@ -38,7 +38,7 @@ namespace BooksManagementSystem.DataService
         {
             _booksRepo.Update(book);
         }
-        public List<Book> Search(string name)
+        public IEnumerable<BookDTO> Search(string name)
         {
             return _booksRepo.Search(name);
         }

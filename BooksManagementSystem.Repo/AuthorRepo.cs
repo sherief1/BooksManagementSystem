@@ -1,5 +1,6 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
+using System.Xml.Linq;
 
 
 namespace BooksManagementSystem.Repo
@@ -13,43 +14,62 @@ namespace BooksManagementSystem.Repo
             _authorDAL = authorDAL;
             _appDbContext = AppDbContext;
         }
-
-        public void Delete(Author author)
+        Author MapFields(AuthorDTO authorDTO)
         {
-
-            _authorDAL.Delete(author, _appDbContext);
-        }
-        public Author GetByID(int id)
-        {
-            return _authorDAL.GetByID(id, _appDbContext);
-        }
-
-        public IEnumerable<Author> GetAll()
-        {
-            return _authorDAL.GetAll(_appDbContext);
+            var author = new Author
+            {
+               Id = authorDTO.Id,
+               Name = authorDTO.Name,   
+            };
+            return author;
         }
 
+        AuthorDTO MapFields(Author author)
+        {
+            AuthorDTO authorDTO = new AuthorDTO()
+            {
+                Id= author.Id,
+                Name = author.Name,
+            };
+            return authorDTO;
+        }
+        public void Delete(AuthorDTO authorDTO)
+        {
+
+            _authorDAL.Delete(MapFields(authorDTO), _appDbContext);
+        }
+        public AuthorDTO GetByID(int id)
+        {
+            var author = _authorDAL.GetByID(id, _appDbContext);
+            return MapFields(author);
+        }
         public void Insert(AuthorDTO authorDTO)
         {
-            var author = new Author
-            {
-                Name = authorDTO.Name,
-            };
-            _authorDAL.Insert(author, _appDbContext);
+            _authorDAL.Insert(MapFields(authorDTO), _appDbContext);
         }
-
         public void Update(AuthorDTO authorDTO)
         {
-            var author = new Author
-            {
-                Id = authorDTO.Id,
-                Name = authorDTO.Name,
-            };
-            _authorDAL.Update(author, _appDbContext);
+           
+            _authorDAL.Update(MapFields(authorDTO), _appDbContext);
         }
-        public List<Author> Search(string name)
+        public IEnumerable<AuthorDTO> GetAll()
         {
-            return _authorDAL.Search(name, _appDbContext);
+            var author = _authorDAL.GetAll(_appDbContext);
+            if (!author.Any())
+            {
+                return null;
+            }
+            return author.Select(MapFields);
+        }
+        public IEnumerable<AuthorDTO> Search(string name)
+        {
+            var author = _authorDAL.Search(name, _appDbContext);
+
+            if (!author.Any())
+            {
+                return null;
+            }
+            return author.Select(MapFields);
         }
         
     }

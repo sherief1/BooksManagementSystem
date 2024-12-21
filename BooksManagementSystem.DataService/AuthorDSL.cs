@@ -12,18 +12,18 @@ namespace BooksManagementSystem.DataService
         }
         public bool Delete(int id)
         {
-            Author AuthortoDelete = GetByID(id);
+            AuthorDTO AuthortoDelete = GetByID(id);
             if (AuthortoDelete == null)
                 return false;
             _authorRepo.Delete(AuthortoDelete);
             return true;
         }
-        public Author GetByID(int id)
+        public AuthorDTO GetByID(int id)
         {
             return _authorRepo.GetByID(id);
         }
 
-        public IEnumerable<Author> GetAll()
+        public IEnumerable<AuthorDTO> GetAll()
         {
             return _authorRepo.GetAll();
         }
@@ -37,7 +37,7 @@ namespace BooksManagementSystem.DataService
         {
             _authorRepo.Update(authorDTO);
         }
-        public List<Author> Search(string name)
+        public IEnumerable<AuthorDTO> Search(string name)
         {
             return _authorRepo.Search(name);
         }

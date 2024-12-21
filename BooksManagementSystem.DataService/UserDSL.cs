@@ -1,6 +1,8 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Common.Helpers;
 using BooksManagementSystem.Interfaces;
+using BooksManagementSystem.Common.DTOs;
+
 
 namespace BooksManagementSystem.DataService
 {
@@ -12,17 +14,17 @@ namespace BooksManagementSystem.DataService
             _userRepo = userRepo;
         }
 
-        public User GetByUsername(string username)
+        public UserDTO GetByUsername(string username)
         {
             return _userRepo.GetByUsername(username);
         }
-        private User GetByID(int id)
+        private UserDTO GetByID(int id)
         {
             return _userRepo.GetByID(id);
         }
         public bool Delete(int id)
         {
-            User UsertoDelete = GetByID(id);
+            UserDTO UsertoDelete = GetByID(id);
             if (UsertoDelete == null)
                 return false;
             _userRepo.Delete(UsertoDelete);
@@ -43,12 +45,12 @@ namespace BooksManagementSystem.DataService
             return "UserName and password aren't correct";
         }
 
-        public bool Insert(User user)
+        public bool Insert(UserDTO userDTO)
         {
-            if(_userRepo.GetByUsername(user.UserName) == null)
+            if(_userRepo.GetByUsername(userDTO.UserName) == null)
             {
-                user.Password = Hashing.GenerateHash(user.Password);
-                _userRepo.Insert(user);
+                userDTO.Password = Hashing.GenerateHash(userDTO.Password);
+                _userRepo.Insert(userDTO);
                 return true;
             }
             else 

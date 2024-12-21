@@ -37,7 +37,7 @@ namespace BooksManagementSystem.DataAccess
             appDbContext.author.Update(author);
             appDbContext.SaveChanges();
         }
-        public List<Author> Search(string name, AppDbContext appDbContext)
+        public IEnumerable<Author> Search(string name, AppDbContext appDbContext)
         {
             return appDbContext.author.Where(author => author.Name.ToLower().Contains(name.ToLower())).ToList();
         }

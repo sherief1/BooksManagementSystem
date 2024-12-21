@@ -4,13 +4,12 @@ namespace BooksManagementSystem.Interfaces
 {
     public interface IBooksRepo
     {
-        IEnumerable<Book> GetAll();
+        IEnumerable<BookDTO> GetAll();
         Task Insert(BookDTO bookDTO);
         void Update(Book book);
         void Delete(BookDTO bookDTO);
         BookDTO GetByID(int id);
-        List<Book> Search(string name);
+        IEnumerable<BookDTO> Search(string name);
 
-       // Book GetBookByID(int id);
     }
 }

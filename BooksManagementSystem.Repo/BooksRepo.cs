@@ -15,73 +15,84 @@ namespace BooksManagementSystem.Repo
             _booksDAL = booksDAL;
             _appDbContext = appDbContext;
         }
-        public void Delete(BookDTO bookDTO)
+        Book MapFields(BookDTO bookDTO)
         {
-            using var stream = new MemoryStream();
-            bookDTO.Image.CopyToAsync(stream);
+            byte[] UploadedImage = null;
+            var stream = new MemoryStream();
+            if(bookDTO.Image != null)
+            {
+               bookDTO.Image.CopyToAsync(stream);
+               UploadedImage = stream.ToArray();
+            }
+                
             var book = new Book
             {
                 Title = bookDTO.Title,
                 PublishDate = bookDTO.PublishDate,
-                Image = stream.ToArray(),
+                Image = UploadedImage,
                 Price = bookDTO.Price,
                 AuthorId = bookDTO.AuthorId,
-            };      
-            _booksDAL.Delete(book, _appDbContext);
+            };
+            return book;
         }
-        public BookDTO GetByID(int id)
+
+        BookDTO MapFields(Book book)
         {
-            var book = _booksDAL.GetByID(id, _appDbContext);
-
-            if (book == null)
-            {
-                return null;  // Return null if the book does not exist
-            }
-            // Convert the image from byte array to base64 string
-            var imageData = book.Image;
-
-            BookDTO dto = new BookDTO()
+            BookDTO bookDTO = new BookDTO()
             {
                 Title = book.Title,
                 Price = book.Price,
                 PublishDate = book.PublishDate,
                 AuthorId = book.AuthorId,
-                ImageDownloadable = imageData
+                ImageDownloadable = book.Image
             };
-            return dto;
+            return bookDTO;
+        }
+        public void Delete(BookDTO bookDTO)
+        {
+            using var stream = new MemoryStream();
+            
+            _booksDAL.Delete(MapFields(bookDTO), _appDbContext);
+        }
+        public BookDTO GetByID(int id)
+        {
+
+            var book = _booksDAL.GetByID(id, _appDbContext);
+           
+            if(book == null)
+            {
+                return null;
+            }
+            return MapFields(book);
         }
 
-        public IEnumerable<Book> GetAll()
+        public IEnumerable<BookDTO> GetAll()
         {
-            return _booksDAL.GetAll(_appDbContext);
+            var book =  _booksDAL.GetAll(_appDbContext);
+            if (!book.Any())
+            {
+                return null;
+            }
+            return book.Select(MapFields);
         }
 
         public async Task Insert(BookDTO bookDTO)
         {
-            if (bookDTO.Image == null || bookDTO.Image.Length == 0)
-            {
-                throw new ArgumentException("No image uploaded.");
-            }
-            using var stream = new MemoryStream();
-            await bookDTO.Image.CopyToAsync(stream);
-            var book = new Book
-            {
-                Title = bookDTO.Title,
-                PublishDate = bookDTO.PublishDate,
-                Image = stream.ToArray(),
-                Price = bookDTO.Price,
-                AuthorId = bookDTO.AuthorId,
-            };
-            await _booksDAL.Insert(book, _appDbContext);
+            await _booksDAL.Insert(MapFields(bookDTO), _appDbContext);
         }
 
         public void Update(Book book)
         {
             _booksDAL.Update(book, _appDbContext);
         }
-        public List<Book> Search(string name)
+        public IEnumerable<BookDTO> Search(string name)
         {
-            return _booksDAL.Search(name, _appDbContext);
+            var book = _booksDAL.Search(name, _appDbContext);
+            if (!book.Any())
+            {
+                return null;
+            }
+            return book.Select(MapFields);
         }
     }
 }

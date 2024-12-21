@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BooksManagementSystem.Common.DTOs
 {
-    internal class UserDTO
+    public class UserDTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
