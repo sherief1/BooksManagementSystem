@@ -31,6 +31,13 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+//define policies based on roles. Update your authentication setup
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("BooksOnly", policy => policy.RequireClaim("Role", "Basic"));
+    options.AddPolicy("BooksAndAuthors", policy => policy.RequireClaim("Role", "Admin"));
+});
+
 
 builder.Services.AddScoped<IBooksDSL, BooksDSL>();
 builder.Services.AddScoped<IBooksRepo, BooksRepo>();
@@ -43,6 +50,9 @@ builder.Services.AddScoped<IAuthorDAL, AuthorDAL>();
 builder.Services.AddScoped<IUserDSL, UserDSL>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IUserDAL, UserDAL>();
+
+builder.Services.AddScoped<EncryptionHelper>();
+
 
 // Register DbContext with SQL Server
 builder.Services.AddDbContext<AppDbContext>(op =>

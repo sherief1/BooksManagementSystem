@@ -1,5 +1,6 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BooksManagementSystem.DataAccess
 {
@@ -12,7 +13,9 @@ namespace BooksManagementSystem.DataAccess
         }
         public Book GetByID(int id, AppDbContext appDbContext)
         {
-            return appDbContext.books.Find(id);
+            // return appDbContext.books.Find(id).AsNoTracking();
+            return appDbContext.books.AsNoTracking().FirstOrDefault(b => b.Id == id); 
+
         }
 
         public IEnumerable<Book> GetAll(AppDbContext appDbContext)
@@ -36,5 +39,6 @@ namespace BooksManagementSystem.DataAccess
             appDbContext.books.Update(book);
             appDbContext.SaveChanges();
         }
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 
 namespace BooksManagementSystem.DataService
@@ -34,10 +35,11 @@ namespace BooksManagementSystem.DataService
             await _booksRepo.Insert(bookDTO);
         }
 
-        public void Update(BookDTO bookDTO)
+        public async Task Update(BookDTO bookDTO)
         {
-            _booksRepo.Update(bookDTO);
+            await _booksRepo.Update(bookDTO);
         }
+
         public IEnumerable<BookDTO> Search(string name)
         {
             return _booksRepo.Search(name);

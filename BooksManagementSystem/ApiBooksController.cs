@@ -20,6 +20,7 @@ namespace BooksManagementSystem
             _booksDSL = booksDSL;
         }
         //GET : api/books
+        [Authorize(Roles = "Basic,Admin")]  // Users with either role can access these endpoints
         [HttpGet]
         public Task<IActionResult> GetAll()
         {
@@ -86,6 +87,7 @@ namespace BooksManagementSystem
 
             return File(imageData, "image/jpeg", $"{book.Title}_cover.jpg");
         }
+
         //[HttpPost("UploadBookCover")]
         //public async Task<IActionResult> UploadBookCover([FromForm] BookDTO bookDTO)
         //{
@@ -105,6 +107,32 @@ namespace BooksManagementSystem
         //    }
         //}
 
+        //[HttpPost]
+        //public async Task<IActionResult> UploadBookCover(int id, [FromForm] IFormFile imageFile)
+        //{
+        //    if (imageFile == null || imageFile.Length == 0)
+        //        return BadRequest("No image uploaded.");
 
+        //    var book =  _booksDSL.GetByID(id);
+        //    if (book == null)
+        //        return NotFound("Book not found.");
+
+        //    if(book !=null)
+        //    {
+        //        using (var stream = new MemoryStream())
+        //        {
+        //            await imageFile.CopyToAsync(stream);
+        //            book.ImageDownloadable = stream.ToArray();
+        //        }
+        //        _booksDSL.Update(book);
+
+        //        return Ok("Book cover uploaded successfully.");
+        //    }
+        //    else
+        //        return BadRequest("can't upload file");
+            
+        //}
     }
+
 }
+

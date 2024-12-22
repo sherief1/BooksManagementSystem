@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,7 +11,7 @@ namespace BooksManagementSystem.Common.Helpers
         public static string secretKey = "this_is_my_super_secret_key_12345";
 
         // Method to generate JWT token
-        public static string GenerateToken(string username)
+        public static string GenerateToken(string username, string role)
         {
             // Define the token expiration (e.g., 1 hour)
             var expirationTime = DateTime.UtcNow.AddHours(1);
@@ -18,7 +19,8 @@ namespace BooksManagementSystem.Common.Helpers
             // Create claims - you can add more claims as needed
             var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, username) // Add user-specific claim (e.g., username)
+            new Claim(ClaimTypes.Name, username), // Add user-specific claim (e.g., username)
+            new Claim(ClaimTypes.Role, role) // Add user role claim
         };
 
             // Create the signing credentials using the symmetric security key (same as your secret key)

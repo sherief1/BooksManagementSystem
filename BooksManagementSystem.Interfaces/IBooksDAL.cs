@@ -11,5 +11,6 @@ namespace BooksManagementSystem.Interfaces
         void Delete(Book book, AppDbContext appDbContext);
         IEnumerable<Book> Search(string name, AppDbContext appDbContext);
         Book GetByID(int id, AppDbContext appDbContext);
+
     }
 }

@@ -8,7 +8,6 @@ namespace BooksManagementSystem
     [Route("api/[controller]/[action]")]
     [ApiController]
     //[Authorize]
-
     public class ApiAuthorsController : ControllerBase
     {
         private readonly IAuthorDSL _AuthorDSL;
@@ -16,6 +15,7 @@ namespace BooksManagementSystem
         {
             _AuthorDSL = AuthorDSL;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public Task<IActionResult> GetAll()
         {

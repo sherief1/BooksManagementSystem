@@ -9,9 +9,11 @@ namespace BooksManagementSystem.DataService
     public class UserDSL : IUserDSL
     {
         private readonly IUserRepo _userRepo;
-        public UserDSL(IUserRepo userRepo)
+        private readonly EncryptionHelper _encryptionService;
+        public UserDSL(IUserRepo userRepo, EncryptionHelper encryptionService)
         {
             _userRepo = userRepo;
+            _encryptionService = encryptionService;
         }
 
         public UserDTO GetByUsername(string username)
@@ -22,13 +24,14 @@ namespace BooksManagementSystem.DataService
         {
             return _userRepo.GetByID(id);
         }
-        public bool Delete(int id)
+        public void Delete(int id)
         {
-            UserDTO UsertoDelete = GetByID(id);
+            var UsertoDelete = GetByID(id);
             if (UsertoDelete == null)
-                return false;
-            _userRepo.Delete(UsertoDelete);
-            return true;
+                throw new InvalidOperationException("User not found.");
+            else
+                _userRepo.Delete(UsertoDelete);
+            
         }
 
         public string Login(string username, string password)
@@ -36,20 +39,22 @@ namespace BooksManagementSystem.DataService
             var existingUser = _userRepo.GetByUsername(username);
             if (existingUser != null)
             {
+                //return TokenManager.GenerateToken(username);
+
                 bool isVerified = Hashing.VerifyHash(password, existingUser.Password);
                 if (isVerified)
                 {
-                    return TokenManager.GenerateToken(username);
+                    return TokenManager.GenerateToken(username,existingUser.Role);
                 }
             }
-            return "UserName and password aren't correct";
+            return "UserName or password aren't correct";
         }
 
         public bool Insert(UserDTO userDTO)
         {
             if(_userRepo.GetByUsername(userDTO.UserName) == null)
             {
-                userDTO.Password = Hashing.GenerateHash(userDTO.Password);
+                 userDTO.Password = Hashing.GenerateHash(userDTO.Password);
                 _userRepo.Insert(userDTO);
                 return true;
             }

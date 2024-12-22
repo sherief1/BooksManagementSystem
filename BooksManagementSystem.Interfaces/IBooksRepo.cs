@@ -1,4 +1,5 @@
 ﻿using BooksManagementSystem.Common;
+using Microsoft.AspNetCore.Http;
 
 namespace BooksManagementSystem.Interfaces
 {
@@ -6,8 +7,8 @@ namespace BooksManagementSystem.Interfaces
     {
         IEnumerable<BookDTO> GetAll();
         Task Insert(BookDTO bookDTO);
-        void Update(BookDTO bookDTO);
-        void Delete(BookDTO bookDTO);
+        Task Update(BookDTO bookDTO);
+        Task Delete(BookDTO bookDTO);
         BookDTO GetByID(int id);
         IEnumerable<BookDTO> Search(string name);
 

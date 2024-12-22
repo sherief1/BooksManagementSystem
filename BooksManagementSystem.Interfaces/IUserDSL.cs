@@ -8,6 +8,6 @@ namespace BooksManagementSystem.Interfaces
         UserDTO GetByUsername(string username);
         bool Insert(UserDTO userDTO);
         string Login(string username, string password);
-        bool Delete(int id);
+        void Delete(int id);
     }
 }

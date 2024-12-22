@@ -33,11 +33,21 @@ namespace BooksManagementSystem
         [HttpDelete]
         public IActionResult DeleteUser(int id)
         {
-            if(_userDSL.Delete(id)==true)
+            _userDSL.Delete(id);
             return Ok("Deleted !!!");
-            else 
-                return BadRequest("Doesn't exist");
             
+        }
+        [HttpGet]
+        public IActionResult GetByUserName(string username)
+        {
+            if (_userDSL.GetByUsername(username) != null)
+            {
+                return Ok("User Exists");
+            }
+            else
+                return BadRequest("No User Found");
+
+           
         }
     }
 }

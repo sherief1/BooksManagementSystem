@@ -16,8 +16,8 @@ namespace BooksManagementSystem.DataAccess
         }
         public Author GetByID(int id, AppDbContext appDbContext)
         {
-           
-            return appDbContext.author.Find(id);
+
+            return appDbContext.author.AsNoTracking().FirstOrDefault(a => a.Id == id);
         }
 
         public IEnumerable<Author> GetAll(AppDbContext appDbContext)

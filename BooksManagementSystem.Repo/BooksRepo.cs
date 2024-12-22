@@ -15,18 +15,19 @@ namespace BooksManagementSystem.Repo
             _booksDAL = booksDAL;
             _appDbContext = appDbContext;
         }
-        Book MapFields(BookDTO bookDTO)
+        async Task<Book> MapFields(BookDTO bookDTO)
         {
             byte[] UploadedImage = null;
             var stream = new MemoryStream();
             if(bookDTO.Image != null)
             {
-               bookDTO.Image.CopyToAsync(stream);
+               await bookDTO.Image.CopyToAsync(stream);
                UploadedImage = stream.ToArray();
             }
                 
             var book = new Book
             {
+                 Id=bookDTO.Id,
                 Title = bookDTO.Title,
                 PublishDate = bookDTO.PublishDate,
                 Image = UploadedImage,
@@ -39,7 +40,8 @@ namespace BooksManagementSystem.Repo
         BookDTO MapFields(Book book)
         {
             BookDTO bookDTO = new BookDTO()
-            {
+            {   
+                Id=book.Id,
                 Title = book.Title,
                 Price = book.Price,
                 PublishDate = book.PublishDate,
@@ -48,11 +50,9 @@ namespace BooksManagementSystem.Repo
             };
             return bookDTO;
         }
-        public void Delete(BookDTO bookDTO)
+        public async Task Delete(BookDTO bookDTO)
         {
-            using var stream = new MemoryStream();
-            
-            _booksDAL.Delete(MapFields(bookDTO), _appDbContext);
+            _booksDAL.Delete(await MapFields(bookDTO), _appDbContext);
         }
         public BookDTO GetByID(int id)
         {
@@ -78,12 +78,12 @@ namespace BooksManagementSystem.Repo
 
         public async Task Insert(BookDTO bookDTO)
         {
-            await _booksDAL.Insert(MapFields(bookDTO), _appDbContext);
+            await _booksDAL.Insert(await MapFields(bookDTO), _appDbContext);
         }
 
-        public void Update(BookDTO bookDTO)
+        public async Task Update(BookDTO bookDTO)
         {
-            _booksDAL.Update(MapFields(bookDTO), _appDbContext);
+            _booksDAL.Update(await MapFields(bookDTO), _appDbContext);
         }
         public IEnumerable<BookDTO> Search(string name)
         {
@@ -94,5 +94,6 @@ namespace BooksManagementSystem.Repo
             }
             return book.Select(MapFields);
         }
+   
     }
 }
