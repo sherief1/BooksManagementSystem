@@ -1,3 +1,4 @@
+using BooksManagementSystem;
 using BooksManagementSystem.Common;
 using BooksManagementSystem.Common.Helpers;
 using BooksManagementSystem.DataAccess;
@@ -5,8 +6,12 @@ using BooksManagementSystem.DataService;
 using BooksManagementSystem.Interfaces;
 using BooksManagementSystem.Repo;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,15 +34,32 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false, // Disable audience validation
         ClockSkew = TimeSpan.Zero // Optional: Set to zero to avoid token expiration issues
     };
+  
 });
 
+builder.Services.AddHttpContextAccessor();
+
+
+// ---THE BASIC WAY--- //
 //define policies based on roles. Update your authentication setup
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("BooksOnly", policy => policy.RequireClaim("Role", "Basic"));
-    options.AddPolicy("BooksAndAuthors", policy => policy.RequireClaim("Role", "Admin"));
-});
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("BooksOnly", policy => policy.RequireClaim("Role", "Basic"));
+//    options.AddPolicy("BooksAndAuthors", policy => policy.RequireClaim("Role", "Admin"));
+//});
+//-------------------------//
 
+
+//Session handler way
+//builder.Services.AddSingleton<IAuthorizationHandler, SessionHandler>(); // Register the handler
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("BasicRolePolicy", policy =>
+//        policy.Requirements.Add(new SessionRequirement("Basic"))); // Policy for "Basic" role
+
+//    options.AddPolicy("AdminRolePolicy", policy =>
+//        policy.Requirements.Add(new SessionRequirement("Admin"))); // Policy for "Admin" role
+//});
 
 builder.Services.AddScoped<IBooksDSL, BooksDSL>();
 builder.Services.AddScoped<IBooksRepo, BooksRepo>();
@@ -50,6 +72,14 @@ builder.Services.AddScoped<IAuthorDAL, AuthorDAL>();
 builder.Services.AddScoped<IUserDSL, UserDSL>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IUserDAL, UserDAL>();
+
+builder.Services.AddScoped<ISpecialAccessUsersDAL, SpecialAccessUsersDAL>();
+builder.Services.AddScoped<ISpecialAccessUsersRepo, SpecialAccessUsersRepo>();
+builder.Services.AddScoped<ISpecialAccessUsersDSL, SpecialAccessUsersDSL>();
+
+//builder.Services.AddScoped<CustomAuthorizeAttribute>(); //Way 1
+//builder.Services.AddScoped<CAuthorizeAttribute>(); //Way 2
+
 
 builder.Services.AddScoped<EncryptionHelper>();
 

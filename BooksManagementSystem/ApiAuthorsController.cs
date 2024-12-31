@@ -15,6 +15,7 @@ namespace BooksManagementSystem
         {
             _AuthorDSL = AuthorDSL;
         }
+        //[Authorize(Roles = "Admin,Basic")]
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public Task<IActionResult> GetAll()

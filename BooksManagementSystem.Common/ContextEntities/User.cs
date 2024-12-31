@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BooksManagementSystem.Common.ContextEntities;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace BooksManagementSystem.Common
@@ -33,7 +34,9 @@ namespace BooksManagementSystem.Common
         [Required]
         [MaxLength(256)]
         public string Role { get; set; }
-        
+        public ICollection<UserBookRent> UserBookRents { get; set; }
+
+
 
     }
 }

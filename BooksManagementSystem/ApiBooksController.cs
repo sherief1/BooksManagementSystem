@@ -1,14 +1,13 @@
-﻿using BooksManagementSystem.Common;
+﻿using BooksManagementSystem;
+using BooksManagementSystem.Common;
 using BooksManagementSystem.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
                                                
 namespace BooksManagementSystem
 {
-    //This attribute defines the routing for the API.
-    //[controller] will be replaced with the controller's name (Books), so the route becomes /api/books.
+  
     [Route("api/[controller]/[action]")]
-    // This attribute marks the class as an API controller
     [ApiController]
     //[Authorize]
     public class ApiBooksController : ControllerBase
@@ -20,8 +19,11 @@ namespace BooksManagementSystem
             _booksDSL = booksDSL;
         }
         //GET : api/books
-        [Authorize(Roles = "Basic,Admin")]  // Users with either role can access these endpoints
+        //[Authorize(Roles = "Basic,Admin")]  //basic authorize
+        //[CustomAuthorize("Basic")]  // CustomAuthorizeAttribute
         [HttpGet]
+        [TypeFilter(typeof(CAuthorizeAttribute), Arguments = new object[] { new string[] { "Admin" } })]  //CAuthorizeAttribute
+        //[Authorize(Policy = "BasicRolePolicy")]   // (session handler)
         public Task<IActionResult> GetAll()
         {
             return Task.FromResult<IActionResult>(Ok(_booksDSL.GetAll()));
@@ -35,6 +37,7 @@ namespace BooksManagementSystem
             return Task.FromResult<IActionResult>(BadRequest("No Book with this ID"));
         }
 
+        //[CustomAuthorize("Basic")]  // CustomAuthorizeAttribute
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBookById(int id)
         {
@@ -87,51 +90,7 @@ namespace BooksManagementSystem
 
             return File(imageData, "image/jpeg", $"{book.Title}_cover.jpg");
         }
-
-        //[HttpPost("UploadBookCover")]
-        //public async Task<IActionResult> UploadBookCover([FromForm] BookDTO bookDTO)
-        //{
-        //    if (bookDTO.Image == null || bookDTO.Image.Length == 0)
-        //    {
-        //        return BadRequest("No image uploaded.");
-        //    }
-
-        //    try
-        //    {
-        //        await _booksDSL.Insert(bookDTO);
-        //        return Ok("Book cover uploaded successfully.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Internal server error: {ex.Message}");
-        //    }
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> UploadBookCover(int id, [FromForm] IFormFile imageFile)
-        //{
-        //    if (imageFile == null || imageFile.Length == 0)
-        //        return BadRequest("No image uploaded.");
-
-        //    var book =  _booksDSL.GetByID(id);
-        //    if (book == null)
-        //        return NotFound("Book not found.");
-
-        //    if(book !=null)
-        //    {
-        //        using (var stream = new MemoryStream())
-        //        {
-        //            await imageFile.CopyToAsync(stream);
-        //            book.ImageDownloadable = stream.ToArray();
-        //        }
-        //        _booksDSL.Update(book);
-
-        //        return Ok("Book cover uploaded successfully.");
-        //    }
-        //    else
-        //        return BadRequest("can't upload file");
-            
-        //}
+       
     }
 
 }

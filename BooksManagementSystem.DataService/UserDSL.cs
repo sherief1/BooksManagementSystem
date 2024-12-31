@@ -44,7 +44,7 @@ namespace BooksManagementSystem.DataService
                 bool isVerified = Hashing.VerifyHash(password, existingUser.Password);
                 if (isVerified)
                 {
-                    return TokenManager.GenerateToken(username,existingUser.Role);
+                    return TokenManager.GenerateToken(existingUser.UserName, existingUser.Role);
                 }
             }
             return "UserName or password aren't correct";

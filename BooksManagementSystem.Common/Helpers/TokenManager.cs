@@ -10,7 +10,7 @@ namespace BooksManagementSystem.Common.Helpers
     {
         public static string secretKey = "this_is_my_super_secret_key_12345";
 
-        // Method to generate JWT token
+        //Method to generate JWT token
         public static string GenerateToken(string username, string role)
         {
             // Define the token expiration (e.g., 1 hour)
@@ -22,6 +22,8 @@ namespace BooksManagementSystem.Common.Helpers
             new Claim(ClaimTypes.Name, username), // Add user-specific claim (e.g., username)
             new Claim(ClaimTypes.Role, role) // Add user role claim
         };
+
+
 
             // Create the signing credentials using the symmetric security key (same as your secret key)
             var signingCredentials = new SigningCredentials(

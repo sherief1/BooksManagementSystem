@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BooksManagementSystem.Common.ContextEntities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BooksManagementSystem.Common
 {
@@ -12,5 +13,7 @@ namespace BooksManagementSystem.Common
         public DbSet<Book> books { get; set; }
         public DbSet<Author> author { get; set; }
         public DbSet<User> user { get; set; }
+        public DbSet<UserBookRent> userBookRents { get; set; }
+        public DbSet<SpecialAccessUsers> specialAccessUsers { get; set; }
     }
 }
