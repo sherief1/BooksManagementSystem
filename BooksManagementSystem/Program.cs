@@ -1,4 +1,5 @@
 using BooksManagementSystem;
+using BooksManagementSystem.authorization_for_special_users;
 using BooksManagementSystem.Common;
 using BooksManagementSystem.Common.Helpers;
 using BooksManagementSystem.DataAccess;
@@ -50,7 +51,7 @@ builder.Services.AddHttpContextAccessor();
 //-------------------------//
 
 
-//Session handler way
+//authorization using policy (Session handler way)
 //builder.Services.AddSingleton<IAuthorizationHandler, SessionHandler>(); // Register the handler
 //builder.Services.AddAuthorization(options =>
 //{
@@ -60,6 +61,20 @@ builder.Services.AddHttpContextAccessor();
 //    options.AddPolicy("AdminRolePolicy", policy =>
 //        policy.Requirements.Add(new SessionRequirement("Admin"))); // Policy for "Admin" role
 //});
+
+//authorization using policy for special users
+builder.Services.AddScoped<IAuthorizationHandler, SpecialAccessHandler>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("BasicAccessPolicy", policy =>
+    {
+        policy.Requirements.Add(new SpecialAccessRequirement("Basic"));
+    });
+    options.AddPolicy("AdminAccessPolicy", policy =>
+    {
+        policy.Requirements.Add(new SpecialAccessRequirement("Admin"));
+    });
+});
 
 builder.Services.AddScoped<IBooksDSL, BooksDSL>();
 builder.Services.AddScoped<IBooksRepo, BooksRepo>();

@@ -22,8 +22,9 @@ namespace BooksManagementSystem
         //[Authorize(Roles = "Basic,Admin")]  //basic authorize
         //[CustomAuthorize("Basic")]  // CustomAuthorizeAttribute
         [HttpGet]
-        [TypeFilter(typeof(CAuthorizeAttribute), Arguments = new object[] { new string[] { "Admin" } })]  //CAuthorizeAttribute
+        //[TypeFilter(typeof(CAuthorizeAttribute), Arguments = new object[] { new string[] { "Admin" } })]  //CAuthorizeAttribute
         //[Authorize(Policy = "BasicRolePolicy")]   // (session handler)
+        [Authorize(Policy = "AdminAccessPolicy")] //authorization using policy for special users
         public Task<IActionResult> GetAll()
         {
             return Task.FromResult<IActionResult>(Ok(_booksDSL.GetAll()));
